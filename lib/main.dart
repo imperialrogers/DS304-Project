@@ -1,4 +1,4 @@
-import 'package:ds304/user_list_screen.dart';
+import 'package:ds304/members_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,11 +12,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: '',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: UserListScreen(),
+      home: MembersScreen(),
     );
   }
 }
