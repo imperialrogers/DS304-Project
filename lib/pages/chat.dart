@@ -53,28 +53,6 @@ class _ChatScreenState extends State<ChatScreen> {
     double _borderRadius = 30;
     return Scaffold(
       backgroundColor: Colors.white,
-      // appBar: AppBar(
-      //   toolbarHeight: 30,
-      //   title: const Text(
-      //     textAlign: TextAlign.left,
-      //     'Mayank',
-      //     style: TextStyle(
-      //       fontFamily: 'Gotham',
-      //       fontSize: 20,
-      //       color: Colors.black,
-      //     ),
-      //   ),
-      //   backgroundColor: Colors.white,
-
-      //   elevation: 0,
-      //   // leading: IconButton(
-      //   //   icon: const Icon(Icons.arrow_back),
-      //   //   onPressed: () {
-      //   //     // Add the code to navigate back to the previous screen
-
-      //   //   },
-      //   // ),
-      // ),
       appBar: AppBar(
         title: const Row(
           children: [
@@ -96,6 +74,13 @@ class _ChatScreenState extends State<ChatScreen> {
               ],
             ),
           ],
+        ),
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         actions: [
           IconButton(
