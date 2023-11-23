@@ -37,7 +37,7 @@ migrate_working_dir/
 /windows/
 /macos/
 /web/
-
+/lib/main.dart
 # Symbolication related
 app.*.symbols
 
