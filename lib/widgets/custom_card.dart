@@ -5,11 +5,12 @@ class CustomCard extends StatelessWidget {
   final String title;
   final Function onTap;
 
-  const CustomCard(
-      {super.key,
-      required this.icon,
-      required this.title,
-      required this.onTap});
+  const CustomCard({
+    super.key,
+    required this.icon,
+    required this.title,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {

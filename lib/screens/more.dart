@@ -1,4 +1,9 @@
+import 'package:ds304/pages/chat.dart';
+import 'package:ds304/screens/blog_screen.dart';
 import 'package:ds304/screens/details.dart';
+import 'package:ds304/screens/profile_page.dart';
+import 'package:ds304/screens/profile_screen.dart';
+import 'package:ds304/screens/setting_screen.dart';
 import 'package:ds304/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:ds304/widgets/search.dart';
@@ -75,7 +80,7 @@ class MoreScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const DetailsScreen(),
+                            builder: (context) => const ChatScreen(),
                           ),
                         );
                       },
@@ -88,7 +93,7 @@ class MoreScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const DetailsScreen(),
+                            builder: (context) => const SettingsPage(),
                           ),
                         );
                       },
@@ -146,7 +151,7 @@ class MoreScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const DetailsScreen(),
+                            builder: (context) => const MyHomePage(),
                           ),
                         );
                       },
@@ -217,7 +222,9 @@ class MoreScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const DetailsScreen(),
+                            builder: (context) => const Profile(
+                              title: 'Profile',
+                            ),
                           ),
                         );
                       },
@@ -286,7 +293,7 @@ class MoreScreen extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const DetailsScreen(),
+                              builder: (context) => const ProfileScreen(),
                             ),
                           );
                         },

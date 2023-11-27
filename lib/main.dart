@@ -1,8 +1,14 @@
 import 'package:ds304/screens/more.dart';
-import 'package:ds304/pages/chat.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-void main() {
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
   runApp(const MyApp());
 }
 
@@ -15,10 +21,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+        primaryColor: Colors.blue.shade300,
+        dividerColor: Colors.black,
       ),
-      home:  ChatScreen(),
+      home: const MoreScreen(),
     );
   }
 }
