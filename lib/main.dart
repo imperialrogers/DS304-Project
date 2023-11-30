@@ -1,17 +1,22 @@
-import 'package:ds304/screens/more.dart';
 import 'package:ds304/home_screen.dart';
-import 'package:ds304/members_screen.dart';
+import 'package:ds304/login_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-Future main() async {
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
+
+// ...
+
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
-
-  runApp(const MyApp());
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -20,13 +25,34 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '',
       debugShowCheckedModeBanner: false,
+      title: 'Alumni Connect',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        buttonTheme: ButtonThemeData(
+          buttonColor: Colors.pink,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.pink,
+          background: Colors.pink,
+          secondary: Colors.red[400],
+          brightness: Brightness.dark,
+        ),
         useMaterial3: true,
       ),
-      home: HomeScreen(),
+      home: StreamBuilder(
+          builder: (ctx, userSnapshot) {
+            if (userSnapshot.connectionState == ConnectionState.waiting)
+              return HomeScreen();
+
+            if (userSnapshot.hasData) {
+              return HomeScreen();
+            }
+            return AuthScreen();
+          },
+          stream: FirebaseAuth.instance.authStateChanges()),
     );
   }
 }
