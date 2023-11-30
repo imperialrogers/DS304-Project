@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "436748342271",
+    "firebase_url": "https://ds304-966e6-default-rtdb.firebaseio.com",
+    "project_id": "ds304-966e6",
+    "storage_bucket": "ds304-966e6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:436748342271:android:cf7ac828cd269788c70dca",
+        "android_client_info": {
+          "package_name": "com.example.ds304"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyABRz7eXAZLTcFih3qoTbMN6cpDuF6J-PU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
