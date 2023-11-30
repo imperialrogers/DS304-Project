@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:ds304/constants.dart';
+import 'package:ds304/login_screen.dart';
 import 'package:ds304/message_list_item.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -25,6 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
+          color: Colors.white,
         ),
         child: Column(
           children: [
@@ -40,7 +43,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   //SEARCH BAR
 
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      FirebaseAuth.instance.signOut();
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
