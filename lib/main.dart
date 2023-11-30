@@ -1,4 +1,6 @@
 import 'package:ds304/screens/more.dart';
+import 'package:ds304/home_screen.dart';
+import 'package:ds304/members_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -18,13 +20,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: '',
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
       theme: ThemeData(
-        primaryColor: Colors.blue.shade300,
-        dividerColor: Colors.black,
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
       ),
-      home: const MoreScreen(),
+      home: HomeScreen(),
     );
   }
 }
