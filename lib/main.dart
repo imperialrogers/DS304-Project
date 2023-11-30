@@ -1,4 +1,4 @@
-import 'package:ds304/screens/more.dart';
+import 'package:ds304/pages/homescreen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
         primaryColor: Colors.blue.shade300,
         dividerColor: Colors.black,
       ),
-      home: const MoreScreen(),
+      home: const HomeScreen(),
     );
   }
 }

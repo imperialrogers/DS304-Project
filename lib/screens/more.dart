@@ -1,4 +1,5 @@
 import 'package:ds304/pages/chat.dart';
+import 'package:ds304/pages/notification.dart';
 import 'package:ds304/screens/blog_screen.dart';
 import 'package:ds304/screens/details.dart';
 import 'package:ds304/screens/profile_page.dart';
@@ -7,6 +8,7 @@ import 'package:ds304/screens/setting_screen.dart';
 import 'package:ds304/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:ds304/widgets/search.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class MoreScreen extends StatelessWidget {
   const MoreScreen({super.key});
@@ -54,7 +56,7 @@ class MoreScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const DetailsScreen(),
+                            builder: (context) => const NotificationScreen(),
                           ),
                         );
                       },
@@ -187,7 +189,7 @@ class MoreScreen extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.only(left: 15.0, bottom: 8.0, top: 8.0),
             child: Text(
-              "VIDEOs",
+              "VIDEOS",
               style: TextStyle(
                 color: Color.fromARGB(255, 99, 98, 98),
                 fontSize: 14,
@@ -228,6 +230,56 @@ class MoreScreen extends StatelessWidget {
                           ),
                         );
                       },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget logout(BuildContext context) {
+    return SizedBox(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Padding(
+            padding: EdgeInsets.only(left: 15.0, bottom: 8.0, top: 8.0),
+            child: Text(
+              "OTHERS",
+              style: TextStyle(
+                color: Color.fromARGB(255, 99, 98, 98),
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.white,
+                boxShadow: const [
+                  BoxShadow(
+                    color: Colors.grey,
+                    blurRadius: 2,
+                    offset: Offset(0, 1),
+                  ),
+                ],
+              ),
+              height: 90,
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8.0, bottom: 10),
+                child: Column(
+                  children: [
+                    CustomCard(
+                      icon: MdiIcons.logout,
+                      title: 'Sign Out',
+                      onTap: () {},
                     ),
                   ],
                 ),
@@ -312,6 +364,10 @@ class MoreScreen extends StatelessWidget {
               height: 18,
             ),
             video(context),
+            const SizedBox(
+              height: 18,
+            ),
+            logout(context)
           ],
         ),
       ),
