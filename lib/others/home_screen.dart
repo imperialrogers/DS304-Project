@@ -1,68 +1,23 @@
 import 'dart:async';
-import 'package:ds304/constants.dart';
-import 'package:ds304/message_list_item.dart';
+import 'package:ds304/others/constants.dart';
+import 'package:ds304/others/message_list_item.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class UserListScreen extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   static const routeName = "/user-list-screen";
-  const UserListScreen({super.key});
+  const HomeScreen({super.key});
 
   @override
-  State<UserListScreen> createState() => _UserListScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _UserListScreenState extends State<UserListScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   ///Initial Variables
   bool _isLoading = false;
   var listening;
   var listeningM;
   TextEditingController _searchController = TextEditingController();
-
-  ///Init
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  /// Function to show Circular Progress Indicator and load messages meanwhile
-  // Future<void> _loadItems() async {
-  //   if (listening == null) {
-  //     setState(() {
-  //       _isLoading = true;
-  //     });
-
-  //     widget.client.streamConversations().listen((convo) async {
-  //       debugPrint(
-  //         'Got a new conversation with ${convo.peer}',
-  //       );
-  //       messages.add(convo);
-  //     }, onError: (e) {
-  //       print(e);
-  //     });
-
-  //     List<xmtp.Conversation> fetchedItems =
-  //         await xmtpService.listConversations(
-  //       client: widget.client,
-  //       sort: xmtp.SortDirection.SORT_DIRECTION_ASCENDING,
-  //     );
-
-  //     saveConversations(fetchedItems);
-
-  //     setState(() {
-  //       messages = fetchedItems;
-  //       _isLoading = false;
-  //     });
-  //   }
-  // }
-
-  // void saveConversations(List<xmtp.Conversation> fetchedItems) async {
-  //   const mySecureStorage = FlutterSecureStorage();
-
-  //   for (var convo in fetchedItems) {
-  //     await mySecureStorage.write(
-  //         key: "${convo.peer}", value: convo.conversationId.toString());
-  //   }
-  // }
 
   ///Screen UI
   @override
@@ -71,6 +26,7 @@ class _UserListScreenState extends State<UserListScreen> {
       body: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(30),
+          color: Colors.white,
         ),
         child: Column(
           children: [
@@ -80,13 +36,15 @@ class _UserListScreenState extends State<UserListScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   const Text(
-                    "Messages",
+                    "Blogs",
                     style: TextStyle(fontSize: 34, fontWeight: FontWeight.bold),
                   ),
                   //SEARCH BAR
 
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      FirebaseAuth.instance.signOut();
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),

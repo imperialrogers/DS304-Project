@@ -1,6 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import '../auth/user_image_picker.dart';
+import '../widgets/auth/user_image_picker.dart';
 
 class AuthForm extends StatefulWidget {
   AuthForm(this.submitFn, this.isLoading);
@@ -149,7 +149,34 @@ class _AuthFormState extends State<AuthForm> {
                           _isLogin = !_isLogin;
                         });
                       },
-                    )
+                    ),
+                  ElevatedButton.icon(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor:
+                            const Color.fromARGB(255, 223, 255, 187),
+                        shape: const StadiumBorder(),
+                        elevation: 1),
+                    onPressed: () {},
+
+                    //google icon
+                    icon: Image.network(
+                        'https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png',
+                        height: 10,
+                        width: 10),
+
+                    //login with google label
+                    label: RichText(
+                      text: const TextSpan(
+                        style: TextStyle(color: Colors.black, fontSize: 16),
+                        children: [
+                          TextSpan(text: 'Login with '),
+                          TextSpan(
+                              text: 'Google',
+                              style: TextStyle(fontWeight: FontWeight.w500)),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

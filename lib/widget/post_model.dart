@@ -1,4 +1,3 @@
-
 import 'package:ds304/widget/user_model.dart';
 
 class Post {

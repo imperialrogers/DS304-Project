@@ -1,5 +1,5 @@
-import 'package:ds304/home_screen.dart';
-import 'package:ds304/login_screen.dart';
+// import 'package:ds304/home_screen.dart';
+import 'package:ds304/pages/homescreen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,12 +7,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'firebase_options.dart';
-
-// ...
+import 'auth/login_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  //enter full-screen
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+
+  //for setting orientation to portrait only
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -27,32 +33,18 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Alumni Connect',
-      theme: ThemeData(
-        buttonTheme: ButtonThemeData(
-          buttonColor: Colors.pink,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-        ),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.pink,
-          background: Colors.pink,
-          secondary: Colors.red[400],
-          brightness: Brightness.dark,
-        ),
-        useMaterial3: true,
-      ),
       home: StreamBuilder(
-          builder: (ctx, userSnapshot) {
-            if (userSnapshot.connectionState == ConnectionState.waiting)
-              return HomeScreen();
+        builder: (ctx, userSnapshot) {
+          if (userSnapshot.connectionState == ConnectionState.waiting)
+            return HomeScreen();
 
-            if (userSnapshot.hasData) {
-              return HomeScreen();
-            }
-            return AuthScreen();
-          },
-          stream: FirebaseAuth.instance.authStateChanges()),
+          if (userSnapshot.hasData) {
+            return HomeScreen();
+          }
+          return LoginScreen();
+        },
+        stream: FirebaseAuth.instance.authStateChanges(),
+      ),
     );
   }
 }

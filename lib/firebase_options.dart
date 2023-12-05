@@ -70,6 +70,8 @@ class DefaultFirebaseOptions {
     projectId: 'ds304-966e6',
     databaseURL: 'https://ds304-966e6-default-rtdb.firebaseio.com',
     storageBucket: 'ds304-966e6.appspot.com',
+    androidClientId: '436748342271-hs7c6hnuikdd0rrf1t18p6f746gf31mp.apps.googleusercontent.com',
+    iosClientId: '436748342271-1va5usm907hnpadaifb9ae60bsne4ga1.apps.googleusercontent.com',
     iosBundleId: 'com.example.ds304',
   );
 
@@ -80,6 +82,8 @@ class DefaultFirebaseOptions {
     projectId: 'ds304-966e6',
     databaseURL: 'https://ds304-966e6-default-rtdb.firebaseio.com',
     storageBucket: 'ds304-966e6.appspot.com',
+    androidClientId: '436748342271-hs7c6hnuikdd0rrf1t18p6f746gf31mp.apps.googleusercontent.com',
+    iosClientId: '436748342271-nps9acndkpevna2vu37j7olb5uk7kmgc.apps.googleusercontent.com',
     iosBundleId: 'com.example.ds304.RunnerTests',
   );
 }

@@ -1,5 +1,9 @@
+import 'dart:developer';
 import 'dart:io';
-import 'package:ds304/screens/blog_screen.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ds304/helpers/apis.dart';
+import 'package:ds304/user/BlogScreen.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:photo_view/photo_view.dart';
@@ -28,6 +32,39 @@ class _BlogInputScreenState extends State<BlogInputScreen> {
         imageUrl = pickedFile.path;
       });
     }
+  }
+
+  uploadImage() async {
+    //getting image file extension
+    if (imageUrl == null || imageUrl == "") return;
+    File file = File(imageUrl!);
+    final ext = file.path.split('.').last;
+
+    //storage file ref with path
+    final ref = FirebaseStorage.instance.ref().child(
+        'images/${APIs.me.id}/${DateTime.now().millisecondsSinceEpoch}.$ext');
+
+    //uploading image
+    await ref
+        .putFile(file, SettableMetadata(contentType: 'image/$ext'))
+        .then((p0) {
+      log('Data Transferred: ${p0.bytesTransferred / 1000} kb');
+    });
+
+    //updating image in firestore database
+    final url = await ref.getDownloadURL();
+
+    await FirebaseFirestore.instance
+        .collection('blogs')
+        .doc(DateTime.now().microsecondsSinceEpoch.toString())
+        .set({
+      'content': contentController.text,
+      'image_url': url,
+      'subtitile': titleController.text,
+      'title': titleController.text,
+      'time': DateTime.now(),
+      'userId': APIs.me.id,
+    });
   }
 
   @override
@@ -135,6 +172,7 @@ class _BlogInputScreenState extends State<BlogInputScreen> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
+                    uploadImage();
                     Navigator.pop(
                       context,
                       BlogCard(
