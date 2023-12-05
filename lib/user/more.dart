@@ -1,11 +1,11 @@
+import 'package:ds304/Profile_Screen.dart';
+import 'package:ds304/helpers/apis.dart';
 import 'package:ds304/pages/chat.dart';
+import 'package:ds304/pages/homescreen.dart';
 import 'package:ds304/pages/notification.dart';
-import 'package:ds304/screens/blog_screen.dart';
-import 'package:ds304/screens/details.dart';
-import 'package:ds304/screens/profile_page.dart';
-import 'package:ds304/screens/profile_screen.dart';
-import 'package:ds304/screens/setting_screen.dart';
+import 'package:ds304/user/BlogScreen.dart';
 import 'package:ds304/widgets/custom_card.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ds304/widgets/search.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -62,19 +62,6 @@ class MoreScreen extends StatelessWidget {
                       },
                     ),
                     CustomCard(
-                      icon: Icons.emoji_events,
-                      title: 'My Achievements',
-                      onTap: () {
-                        // Navigate to a new screen
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const DetailsScreen(),
-                          ),
-                        );
-                      },
-                    ),
-                    CustomCard(
                       icon: Icons.message,
                       title: 'Messages',
                       onTap: () {
@@ -83,19 +70,6 @@ class MoreScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => const ChatScreen(),
-                          ),
-                        );
-                      },
-                    ),
-                    CustomCard(
-                      icon: Icons.settings,
-                      title: 'Settings',
-                      onTap: () {
-                        // Navigate to a new screen
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const SettingsPage(),
                           ),
                         );
                       },
@@ -153,7 +127,7 @@ class MoreScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const MyHomePage(),
+                            builder: (context) => BlogScreen(),
                           ),
                         );
                       },
@@ -166,67 +140,7 @@ class MoreScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const DetailsScreen(),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
-  Widget video(BuildContext context) {
-    return SizedBox(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Padding(
-            padding: EdgeInsets.only(left: 15.0, bottom: 8.0, top: 8.0),
-            child: Text(
-              "VIDEOS",
-              style: TextStyle(
-                color: Color.fromARGB(255, 99, 98, 98),
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.white,
-                boxShadow: const [
-                  BoxShadow(
-                    color: Colors.grey,
-                    blurRadius: 2,
-                    offset: Offset(0, 1),
-                  ),
-                ],
-              ),
-              height: 90,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 8.0, bottom: 10),
-                child: Column(
-                  children: [
-                    CustomCard(
-                      icon: Icons.videocam_outlined,
-                      title: 'Promo Videos',
-                      onTap: () {
-                        // Navigate to a new screen
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const Profile(
-                              title: 'Profile',
-                            ),
+                            builder: (context) => const HomeScreen(),
                           ),
                         );
                       },
@@ -279,7 +193,9 @@ class MoreScreen extends StatelessWidget {
                     CustomCard(
                       icon: MdiIcons.logout,
                       title: 'Sign Out',
-                      onTap: () {},
+                      onTap: () {
+                        FirebaseAuth.instance.signOut();
+                      },
                     ),
                   ],
                 ),
@@ -331,23 +247,17 @@ class MoreScreen extends StatelessWidget {
                   ),
                   child: Center(
                     child: ListTile(
-                      leading: const CircleAvatar(
-                        radius: 30,
-                        backgroundImage: NetworkImage(
-                            'https://www.pngkey.com/png/detail/52-523516_empty-profile-picture-circle.png'),
-                      ),
-                      title: const Text('John Doe'),
-                      subtitle: const Text('Info'),
+                      title: const Text('MY BIO'),
+                      subtitle: const Text('View, update and Modify'),
                       trailing: IconButton(
                         icon: const Icon(Icons.arrow_forward_ios),
                         onPressed: () {
                           // Navigate to a new screen
                           Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const ProfileScreen(),
-                            ),
-                          );
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) =>
+                                      ProfileScreen(user: APIs.me)));
                         },
                       ),
                     ),
@@ -363,10 +273,7 @@ class MoreScreen extends StatelessWidget {
             const SizedBox(
               height: 18,
             ),
-            video(context),
-            const SizedBox(
-              height: 18,
-            ),
+
             logout(context)
           ],
         ),

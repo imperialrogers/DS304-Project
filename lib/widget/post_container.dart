@@ -1,4 +1,3 @@
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ds304/widget/pallete.dart';
 import 'package:ds304/widget/post_model.dart';
@@ -16,6 +15,8 @@ class PostContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final posts = [];
+    // posts = ;
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 5.0),
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -149,12 +150,6 @@ class _PostStats extends StatelessWidget {
                 ),
               ),
             ),
-            Text(
-              '${post.comments} Comments',
-              style: TextStyle(
-                color: Colors.grey[600],
-              ),
-            ),
             const SizedBox(
               width: 8.0,
             ),
@@ -177,15 +172,6 @@ class _PostStats extends StatelessWidget {
               ),
               label: 'Like',
               onTap: () => print('Like'),
-            ),
-            _PostButton(
-              icon: Icon(
-                MdiIcons.commentOutline,
-                color: Colors.grey[600],
-                size: 20.0,
-              ),
-              label: 'Comment',
-              onTap: () => print('Comment'),
             ),
             _PostButton(
               icon: Icon(
@@ -221,7 +207,7 @@ class _PostButton extends StatelessWidget {
       child: Material(
         color: Colors.white,
         child: InkWell(
-          onTap: (){},
+          onTap: () {},
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             height: 25.0,

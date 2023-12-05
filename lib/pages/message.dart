@@ -1,10 +1,14 @@
-import 'package:ds304/pages/chat.dart';
-import 'package:ds304/widgets/search.dart';
+import 'package:ds304/chat/Member_List.dart';
 import 'package:flutter/material.dart';
 
-class Message extends StatelessWidget {
-  const Message({super.key});
+class Message extends StatefulWidget {
+  Message({super.key});
 
+  @override
+  State<Message> createState() => _MessageState();
+}
+
+class _MessageState extends State<Message> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,14 +24,15 @@ class Message extends StatelessWidget {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Search Button
-            const SearchWidget(),
-            // Card
-            SizedBox(
+      body: MemberList(),
+    );
+  }
+}
+
+
+/*
+
+SizedBox(
               height: 120,
               child: Card(
                 margin: const EdgeInsets.all(12.0),
@@ -53,28 +58,16 @@ class Message extends StatelessWidget {
                             backgroundImage: NetworkImage(
                                 'https://www.pngkey.com/png/detail/52-523516_empty-profile-picture-circle.png'),
                           ),
-                          title: const Text('Rohit Chaudhari'),
-                          subtitle:
-                              const Text('Hi, this is Rohit from IIIT DHARWAD'),
+                          title: Text("Rohit Chaudhari"),
                           onTap: () {
                             Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ChatScreen(),
-                      ),
-                    );
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const ChatScreen(),
+                              ),
+                            );
                             // Add any functionality when tapping the card
                           },
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.all(8.0),
-                        child: Text(
-                          'Oct 9',
-                          style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 14,
-                          ),
                         ),
                       ),
                     ],
@@ -82,12 +75,5 @@ class Message extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(
-              height: 18,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+
+*/

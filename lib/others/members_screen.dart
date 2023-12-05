@@ -1,7 +1,9 @@
-import 'package:ds304/constants.dart';
-import 'package:ds304/member_list_item.dart';
-import 'package:ds304/search_widget.dart';
+import 'package:ds304/others/constants.dart';
+
+import '../others/member_list_item.dart';
 import 'package:flutter/material.dart';
+
+import '../widgets/search.dart';
 
 class MembersScreen extends StatefulWidget {
   static const routeName = "/user-list-screen";
