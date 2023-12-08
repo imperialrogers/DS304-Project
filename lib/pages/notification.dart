@@ -7,31 +7,34 @@ class NotificationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: IconButton(
-            icon: const Icon(
-              Icons.arrow_back_ios_new,
-              color: Colors.black,
-              size: 30,
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.blue[400]!,
+                Colors.blue[800]!,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
             ),
-            onPressed: () => Navigator.of(context).pop(),
           ),
         ),
-        title: const Padding(
-          padding: EdgeInsets.only(top: 12),
-          child: Text(
-            'Notifications',
-            style: TextStyle(
-                color: Color.fromARGB(200, 50, 53, 51),
-                fontWeight: FontWeight.bold,
-                fontSize: 19),
+        title: const Text(
+          'Notifications',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 22,
+            fontWeight: FontWeight.w400,
           ),
         ),
-        toolbarHeight: 55,
-        automaticallyImplyLeading: true,
-        elevation: 0,
-        backgroundColor: const Color.fromARGB(0, 255, 255, 255),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        centerTitle: true,
+        toolbarHeight: 65,
       ),
       body: ListView.builder(
         itemCount: 5, // replace with actual notification count
@@ -39,7 +42,7 @@ class NotificationScreen extends StatelessWidget {
           return Dismissible(
             direction: DismissDirection.endToStart,
             onDismissed: (direction) {},
-            key: const Key(""),
+            key: Key("$index"),
             background: Container(
               alignment: AlignmentDirectional.centerEnd,
               color: Colors.red,
@@ -52,33 +55,36 @@ class NotificationScreen extends StatelessWidget {
                 ),
               ),
             ),
-            child: Container(
-              padding: const EdgeInsets.all(5),
-              clipBehavior: Clip.antiAliasWithSaveLayer,
-              decoration:
-                  BoxDecoration(borderRadius: BorderRadius.circular(70)),
-              child: Card(
-                elevation: 0,
-                child: ListTile(
-                  title: Text(
-                    'Notification Title $index', // replace with actual notification title
-                    style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+            child: Card(
+              elevation: 0,
+              margin: const EdgeInsets.all(0), // Adjust card margin
+              child: ListTile(
+                contentPadding:
+                    const EdgeInsets.all(8), // Adjust content padding
+                leading: const CircleAvatar(
+                  // Add a user profile image or notification icon
+                  backgroundColor: Colors.blue,
+                  child: Icon(
+                    Icons.notifications,
+                    color: Colors.white,
                   ),
-                  subtitle: Text(
-                    'Notification Message $index', // replace with actual notification message
-                    style: const TextStyle(fontSize: 14),
-                  ),
-                  trailing: const Text(
-                    '3d ago', // replace with actual timestamp
-                    style: TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                  onTap: () {
-                    // TODO: Implement notification tap logic
-                  },
                 ),
+                title: Text(
+                  'Notification Title $index',
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                subtitle: Text(
+                  'Notification Message $index',
+                  style: const TextStyle(fontSize: 14),
+                ),
+                trailing: const Text(
+                  '3d ago',
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+                onTap: () {},
               ),
             ),
           );

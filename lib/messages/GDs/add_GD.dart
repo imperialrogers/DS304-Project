@@ -64,7 +64,36 @@ class _GDInputScreenState extends State<GDInputScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Blog Input'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.blue[400]!,
+                Colors.blue[800]!,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        title: const Text(
+          'Add New Group Discussion',
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.w400,
+              fontFamily: 'Lato'),
+        ),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -74,10 +103,10 @@ class _GDInputScreenState extends State<GDInputScreen> {
             children: [
               const SizedBox(height: 8),
               TextFormField(
-                cursorColor: const Color(0xff17CE92),
+                cursorColor: const Color.fromARGB(255, 15, 95, 234),
                 controller: titleController,
                 decoration: InputDecoration(
-                  labelText: 'Title',
+                  labelText: 'Group Name',
                   labelStyle: TextStyle(
                     color: Colors.grey[700],
                     fontSize: 16.0,
@@ -89,7 +118,7 @@ class _GDInputScreenState extends State<GDInputScreen> {
                       borderRadius: BorderRadius.circular(16)),
                   focusedBorder: OutlineInputBorder(
                       borderSide: const BorderSide(
-                        color: Color(0xff17CE92),
+                        color: Color.fromARGB(255, 15, 95, 234),
                       ),
                       borderRadius: BorderRadius.circular(16)),
                   filled: true,
@@ -141,13 +170,12 @@ class _GDInputScreenState extends State<GDInputScreen> {
                     Navigator.pop(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => Members(),
+                        builder: (context) => const Members(),
                       ),
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(
-                        0xff17CE92), // Set the background color to green
+                    backgroundColor: const Color.fromARGB(206, 15, 95, 234),
                   ),
                   child: const Text('Create New Group Discussion',
                       style: TextStyle(color: Colors.white)),

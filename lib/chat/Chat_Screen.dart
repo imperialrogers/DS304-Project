@@ -51,17 +51,12 @@ class _ChatScreenState extends State<ChatScreen> {
             }
           },
           child: Scaffold(
-            //app bar
-            appBar: AppBar(
-              automaticallyImplyLeading: false,
-              flexibleSpace: _appBar(mq),
-            ),
-
-            backgroundColor: const Color.fromARGB(255, 234, 248, 255),
+            backgroundColor: Colors.white,
 
             //body
             body: Column(
               children: [
+                _appBar(mq),
                 Expanded(
                   child: StreamBuilder(
                     stream: APIs.getAllMessages(widget.user),
@@ -112,6 +107,10 @@ class _ChatScreenState extends State<ChatScreen> {
                           child: CircularProgressIndicator(strokeWidth: 2))),
 
                 //chat input filed
+                const Divider(
+                    height: 0,
+                    thickness: 1,
+                    color: Color.fromARGB(143, 158, 158, 158)),
                 _chatInput(mq),
 
                 //show emojis on keyboard emoji button click & vice versa
@@ -146,62 +145,98 @@ class _ChatScreenState extends State<ChatScreen> {
               final list =
                   data?.map((e) => ChatUser.fromJson(e.data())).toList() ?? [];
 
-              return Row(
-                children: [
-                  //back button
-                  IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon:
-                          const Icon(Icons.arrow_back, color: Colors.black54)),
-
-                  //user profile picture
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(mq.height * .03),
-                    child: CachedNetworkImage(
-                      width: mq.height * .05,
-                      height: mq.height * .05,
-                      imageUrl:
-                          list.isNotEmpty ? list[0].image : widget.user.image,
-                      errorWidget: (context, url, error) => const CircleAvatar(
-                          child: Icon(CupertinoIcons.person)),
+              return Container(
+                height: mq.height * .08,
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  boxShadow: [
+                    BoxShadow(
+                      color:
+                          Colors.grey, // or any other shadow color you prefer
+                      spreadRadius: 1,
+                      blurRadius: 3,
+                      offset:
+                          Offset(0, 1), // changes the position of the shadow
                     ),
-                  ),
+                  ],
+                ),
+                child: Row(
+                  children: [
+                    IconButton(
+                      onPressed: () => Navigator.pop(context),
+                      icon: const Icon(Icons.arrow_back_ios),
+                    ),
+                    //user profile picture
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(mq.height * .03),
+                      child: CachedNetworkImage(
+                        width: mq.height * .05,
+                        height: mq.height * .05,
+                        imageUrl:
+                            list.isNotEmpty ? list[0].image : widget.user.image,
+                        errorWidget: (context, url, error) =>
+                            const CircleAvatar(
+                                child: Icon(CupertinoIcons.person)),
+                      ),
+                    ),
 
-                  //for adding some space
-                  const SizedBox(width: 10),
+                    //for adding some space
+                    const SizedBox(width: 10),
 
-                  //user name & last seen time
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      //user name
-                      Text(list.isNotEmpty ? list[0].name : widget.user.name,
-                          style: const TextStyle(
-                              fontSize: 16,
-                              color: Colors.black87,
-                              fontWeight: FontWeight.w500)),
+                    //user name & last seen time
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          //user name
+                          Padding(
+                            padding: const EdgeInsets.only(top: 8),
+                            child: Text(
+                                list.isNotEmpty
+                                    ? list[0].name
+                                    : widget.user.name,
+                                style: const TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.w500)),
+                          ),
 
-                      //for adding some space
-                      const SizedBox(height: 2),
+                          //for adding some space
+                          const SizedBox(height: 2),
 
-                      //last seen time of user
-                      Text(
-                        list.isNotEmpty
-                            ? list[0].isOnline
-                                ? 'Online'
+                          //last seen time of user
+                          Text(
+                            list.isNotEmpty
+                                ? list[0].isOnline
+                                    ? 'Online'
+                                    : MyDateUtil.getLastActiveTime(
+                                        context: context,
+                                        lastActive: list[0].lastActive)
                                 : MyDateUtil.getLastActiveTime(
                                     context: context,
-                                    lastActive: list[0].lastActive)
-                            : MyDateUtil.getLastActiveTime(
-                                context: context,
-                                lastActive: widget.user.lastActive),
-                        style: const TextStyle(
-                            fontSize: 13, color: Colors.black54),
+                                    lastActive: widget.user.lastActive),
+                            style: const TextStyle(
+                                fontSize: 13, color: Colors.blue),
+                          ),
+                        ],
                       ),
-                    ],
-                  )
-                ],
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.video_call_sharp,
+                          color: Colors.black54, size: 30),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.phone, color: Colors.black54),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: const Icon(Icons.more_vert, color: Colors.black54),
+                    ),
+                  ],
+                ),
               );
             }));
   }
@@ -216,18 +251,21 @@ class _ChatScreenState extends State<ChatScreen> {
           //input field & buttons
           Expanded(
             child: Card(
+              color: Colors.white,
+              elevation: 6,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15)),
               child: Row(
                 children: [
                   //emoji button
                   IconButton(
-                      onPressed: () {
-                        FocusScope.of(context).unfocus();
-                        setState(() => _showEmoji = !_showEmoji);
-                      },
-                      icon: const Icon(Icons.emoji_emotions,
-                          color: Colors.blueAccent, size: 25)),
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                      setState(() => _showEmoji = !_showEmoji);
+                    },
+                    icon: const Icon(Icons.emoji_emotions,
+                        color: Colors.black54, size: 25),
+                  ),
 
                   Expanded(
                       child: TextField(
@@ -239,7 +277,7 @@ class _ChatScreenState extends State<ChatScreen> {
                     },
                     decoration: const InputDecoration(
                         hintText: 'Type Something...',
-                        hintStyle: TextStyle(color: Colors.blueAccent),
+                        hintStyle: TextStyle(color: Colors.black54),
                         border: InputBorder.none),
                   )),
 
@@ -261,7 +299,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         }
                       },
                       icon: const Icon(Icons.image,
-                          color: Colors.blueAccent, size: 26)),
+                          color: Colors.black54, size: 26)),
 
                   //take image from camera button
                   IconButton(
@@ -281,7 +319,7 @@ class _ChatScreenState extends State<ChatScreen> {
                         }
                       },
                       icon: const Icon(Icons.camera_alt_rounded,
-                          color: Colors.blueAccent, size: 26)),
+                          color: Colors.black54, size: 26)),
 
                   //adding some space
                   SizedBox(width: mq.width * .02),
@@ -310,7 +348,7 @@ class _ChatScreenState extends State<ChatScreen> {
             padding:
                 const EdgeInsets.only(top: 10, bottom: 10, right: 5, left: 10),
             shape: const CircleBorder(),
-            color: Colors.green,
+            color: const Color.fromARGB(255, 15, 95, 234),
             child: const Icon(Icons.send, color: Colors.white, size: 28),
           )
         ],

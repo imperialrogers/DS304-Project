@@ -7,7 +7,6 @@ import 'package:ds304/user/BlogScreen.dart';
 import 'package:ds304/widgets/custom_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ds304/widgets/search.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class MoreScreen extends StatelessWidget {
@@ -43,7 +42,7 @@ class MoreScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              height: 280,
+              height: 160,
               child: Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Column(
@@ -61,6 +60,7 @@ class MoreScreen extends StatelessWidget {
                         );
                       },
                     ),
+                    const SizedBox(height: 8),
                     CustomCard(
                       icon: Icons.message,
                       title: 'Messages',
@@ -114,7 +114,7 @@ class MoreScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              height: 150,
+              height: 158,
               child: Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Column(
@@ -132,6 +132,7 @@ class MoreScreen extends StatelessWidget {
                         );
                       },
                     ),
+                    const SizedBox(height: 8),
                     CustomCard(
                       icon: Icons.alt_route_sharp,
                       title: 'Activity',
@@ -212,13 +213,31 @@ class MoreScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 244, 240, 240),
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.blue[400]!,
+                Colors.blue[800]!,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
         title: const Text(
           'More',
           style: TextStyle(
-            color: Colors.black,
-            fontSize: 24,
-            fontWeight: FontWeight.w500,
+            color: Colors.white,
+            fontSize: 22,
+            fontWeight: FontWeight.w400,
           ),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         centerTitle: true,
       ),
@@ -226,8 +245,6 @@ class MoreScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Search Button
-            const SearchWidget(),
             // Card
             SizedBox(
               height: 120,
@@ -254,10 +271,11 @@ class MoreScreen extends StatelessWidget {
                         onPressed: () {
                           // Navigate to a new screen
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) =>
-                                      ProfileScreen(user: APIs.me)));
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => ProfileScreen(user: APIs.me),
+                            ),
+                          );
                         },
                       ),
                     ),
@@ -273,7 +291,6 @@ class MoreScreen extends StatelessWidget {
             const SizedBox(
               height: 18,
             ),
-
             logout(context)
           ],
         ),

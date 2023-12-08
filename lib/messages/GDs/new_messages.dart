@@ -41,34 +41,57 @@ class _NewMessageState extends State<NewMessage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(top: 8),
-      padding: EdgeInsets.all(8),
-      child: Row(
-        children: [
-          Expanded(
-            child: TextField(
-              autocorrect: true,
-              textCapitalization: TextCapitalization.sentences,
-              enableSuggestions: true,
-              controller: _controller,
-              decoration: InputDecoration(labelText: 'Send a message...'),
-              onChanged: (value) {
-                setState(() {
-                  _enteredMessage = value;
-                });
-              },
-            ),
+    return Column(
+      children: [
+        const Divider(),
+        Container(
+          padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+          child: Row(
+            children: [
+              Expanded(
+                child: Card(
+                  color: Colors.white,
+                  elevation: 6,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      autocorrect: true,
+                      textCapitalization: TextCapitalization.sentences,
+                      enableSuggestions: true,
+                      controller: _controller,
+                      maxLines: null,
+                      onChanged: (value) {
+                        setState(() {
+                          _enteredMessage = value;
+                        });
+                      },
+                      decoration: const InputDecoration(
+                          hintText: 'Send a message...',
+                          hintStyle: TextStyle(color: Colors.black54),
+                          border: InputBorder.none),
+                    ),
+                  ),
+                ),
+              ),
+              ClipOval(
+                child: Material(
+                  color: _enteredMessage.trim().isEmpty
+                      ? const Color.fromARGB(255, 15, 95, 234)
+                      : const Color.fromARGB(255, 49, 119, 239),
+                  child: IconButton(
+                    onPressed:
+                        _enteredMessage.trim().isEmpty ? null : _sendMessage,
+                    icon: const Icon(Icons.send, color: Colors.white),
+                    color: Colors.white,
+                  ),
+                ),
+              )
+            ],
           ),
-          IconButton(
-            onPressed: _enteredMessage.trim().isEmpty ? null : _sendMessage,
-            // onPressed: null,
-            icon: Icon(Icons.send),
-            color: Colors.red[400],
-            disabledColor: const Color.fromARGB(255, 128, 72, 72),
-          )
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

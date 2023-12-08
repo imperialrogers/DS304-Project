@@ -25,10 +25,11 @@ class _MemberListState extends State<MemberList> {
     return FutureBuilder(
       future: Future.value(FirebaseAuth.instance.currentUser),
       builder: (ctx, futureSnapshot) {
-        if (futureSnapshot.connectionState == ConnectionState.waiting)
-          return Center(
+        if (futureSnapshot.connectionState == ConnectionState.waiting) {
+          return const Center(
             child: CircularProgressIndicator(),
           );
+        }
 
         return StreamBuilder(
           stream: APIs.getMyUsersId(),
