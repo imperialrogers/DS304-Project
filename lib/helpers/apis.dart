@@ -2,12 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:http/http.dart';
-
 import '../models/chat_user.dart';
 import '../models/gd_message.dart';
 import '../models/message.dart';
@@ -376,14 +374,14 @@ class APIs {
   }
 
   //Add a group
-  static Future<void> addFeed(String caption, String imageUrl) async {
-    await firestore.collection('feed').add({
-      'caption': caption,
-      'imageUrl': imageUrl,
-      'likes': 0,
-      'shares': 0,
-      'time': DateTime.now().millisecondsSinceEpoch.toString(),
-      'userId': APIs.me.id,
-    });
-  }
+  // static Future<void> addFeed(String caption, String imageUrl) async {
+  //   await firestore.collection('feed').add({
+  //     'caption': caption,
+  //     'imageUrl': imageUrl,
+  //     'likes': 0,
+  //     'shares': 0,
+  //     'time': DateTime.now().millisecondsSinceEpoch.toString(),
+  //     'userId': APIs.me.id,
+  //   });
+  // }
 }

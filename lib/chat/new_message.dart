@@ -10,7 +10,7 @@ class NewMessage extends StatefulWidget {
 }
 
 class _NewMessageState extends State<NewMessage> {
-  final _controller = new TextEditingController();
+  final _controller = TextEditingController();
   var _enteredMessage = '';
 
   void _sendMessage() async {
@@ -35,8 +35,8 @@ class _NewMessageState extends State<NewMessage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 8),
-      padding: EdgeInsets.all(8),
+      margin: const EdgeInsets.only(top: 8),
+      padding: const EdgeInsets.all(8),
       child: Row(
         children: [
           Expanded(
@@ -45,7 +45,9 @@ class _NewMessageState extends State<NewMessage> {
               textCapitalization: TextCapitalization.sentences,
               enableSuggestions: true,
               controller: _controller,
-              decoration: InputDecoration(labelText: 'Send a message...'),
+              decoration: const InputDecoration(
+                labelText: 'Send a message...',
+              ),
               onChanged: (value) {
                 setState(() {
                   _enteredMessage = value;
@@ -55,7 +57,7 @@ class _NewMessageState extends State<NewMessage> {
           ),
           IconButton(
             onPressed: _enteredMessage.trim().isEmpty ? null : _sendMessage,
-            icon: Icon(Icons.send),
+            icon: const Icon(Icons.send),
             color: Colors.red[400],
             disabledColor: const Color.fromARGB(255, 128, 72, 72),
           )

@@ -37,13 +37,42 @@ class _ProfileScreenState extends State<ProfileScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
           //app bar
-          appBar: AppBar(title: const Text('Profile Screen')),
+          appBar: AppBar(
+            flexibleSpace: Container(
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    Colors.blue[400]!,
+                    Colors.blue[800]!,
+                  ],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+              ),
+            ),
+            title: const Text(
+              'Profile Screen',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 22,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            toolbarHeight: 63,
+            centerTitle: true,
+          ),
 
           //floating button to log out
           floatingActionButton: Padding(
             padding: const EdgeInsets.only(bottom: 10),
             child: FloatingActionButton.extended(
-                backgroundColor: Colors.redAccent,
+                backgroundColor: const Color.fromARGB(255, 82, 173, 248),
                 onPressed: () async {
                   //for showing progress dialog
                   Dialogs.showProgressBar(context);
@@ -196,9 +225,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           });
                         }
                       },
-                      icon: const Icon(Icons.edit, size: 28),
-                      label:
-                          const Text('UPDATE', style: TextStyle(fontSize: 16)),
+                      icon:
+                          const Icon(Icons.edit, color: Colors.black, size: 28),
+                      label: const Text('UPDATE',
+                          style: TextStyle(color: Colors.black, fontSize: 16)),
                     )
                   ],
                 ),
