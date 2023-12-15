@@ -352,6 +352,8 @@
 //     }
 //   }
 
+// ignore_for_file: unused_field
+
 //   // UI
 //   @override
 //   Widget build(BuildContext context) {
@@ -367,10 +369,10 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:ds304/dialogs.dart';
 import 'package:ds304/helpers/apis.dart';
+import 'package:ds304/widget/bottom_nav.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import '../pages/homescreen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -408,11 +410,11 @@ class _LoginScreenState extends State<LoginScreen> {
         if ((await APIs.userExists())) {
           // ignore: use_build_context_synchronously
           Navigator.pushReplacement(
-              context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+              context, MaterialPageRoute(builder: (_) => const BottomNavBar()));
         } else {
           await APIs.createUser().then((value) {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (_) => const BottomNavBar()));
           });
         }
       }
@@ -453,73 +455,35 @@ class _LoginScreenState extends State<LoginScreen> {
     final mq = MediaQuery.of(context).size;
 
     return Scaffold(
-      // app bar
-
       // body
       body: Stack(
         children: [
           Container(
             decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.blue, Colors.white],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+              image: DecorationImage(
+                image: AssetImage('assets/images/login.png'),
+                fit: BoxFit.cover,
               ),
             ),
           ),
 
-          // App logo
-          AnimatedPositioned(
-            top: mq.height * 0.15,
-            right: _isAnimate ? mq.width * 0.25 : -mq.width * 0.5,
-            width: mq.width * 0.5,
-            duration: const Duration(seconds: 1),
-            child: Image.asset(
-                'assets/images/Alumni.png'), // Add your Facebook logo
-          ),
-
-          Positioned(
-            bottom: mq.height * 0.23,
-            left: mq.width * 0.05,
-            width: mq.width * 0.9,
-            height: mq.height * 0.06,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                shape: const StadiumBorder(),
-              ),
-              onPressed: () {
-                // Sign In logic here
-              },
-              child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                child: Text(
-                  'Sign In',
-                  style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-          ),
           const SizedBox(height: 10),
           // Google login button
           Positioned(
-            bottom: mq.height * 0.15,
-            left: mq.width * 0.05,
-            width: mq.width * 0.9,
-            height: mq.height * 0.06,
+            bottom: mq.height * 0.08,
+            left: mq.width * 0.17,
+            width: mq.width * 0.7,
+            height: mq.height * 0.07,
             child: ElevatedButton.icon(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.white,
                 shape: const StadiumBorder(),
-                elevation: 1,
+                elevation: 0,
               ),
               onPressed: _handleGoogleBtnClick,
-              icon: Image.network(
-                'https://www.freepnglogos.com/uploads/google-logo-png/google-logo-png-suite-everything-you-need-know-about-google-newest-0.png',
-                height: mq.height * 0.03,
+              icon: Image.asset(
+                'assets/images/iiit.png',
+                height: mq.height * 0.04,
               ),
               label: RichText(
                 text: const TextSpan(
@@ -527,7 +491,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     TextSpan(text: 'Login with '),
                     TextSpan(
-                      text: 'Google',
+                      text: 'Institute-ID',
                       style: TextStyle(fontWeight: FontWeight.w500),
                     ),
                   ],
