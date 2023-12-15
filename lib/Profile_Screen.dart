@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:ds304/auth/onBoard.dart';
 import 'package:ds304/dialogs.dart';
 import 'package:ds304/helpers/apis.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,7 +14,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../models/chat_user.dart';
-import 'auth/login_screen.dart';
 
 //profile screen -- to show signed in user info
 class ProfileScreen extends StatefulWidget {
@@ -91,10 +91,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       APIs.auth = FirebaseAuth.instance;
 
                       //replacing home screen with login screen
-                      Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                              builder: (_) => const LoginScreen()));
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (_) => const onBoard()));
                     });
                   });
                 },

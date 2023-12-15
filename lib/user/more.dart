@@ -1,4 +1,6 @@
 import 'package:ds304/Profile_Screen.dart';
+import 'package:ds304/auth/onBoard.dart';
+import 'package:ds304/dialogs.dart';
 import 'package:ds304/helpers/apis.dart';
 import 'package:ds304/pages/chat.dart';
 import 'package:ds304/pages/homescreen.dart';
@@ -7,6 +9,7 @@ import 'package:ds304/user/BlogScreen.dart';
 import 'package:ds304/widgets/custom_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class MoreScreen extends StatelessWidget {
@@ -194,8 +197,30 @@ class MoreScreen extends StatelessWidget {
                     CustomCard(
                       icon: MdiIcons.logout,
                       title: 'Sign Out',
-                      onTap: () {
-                        FirebaseAuth.instance.signOut();
+                      onTap: () async {
+                        //for showing progress dialog
+                        Dialogs.showProgressBar(context);
+
+                        await APIs.updateActiveStatus(false);
+
+                        //sign out from app
+                        await APIs.auth.signOut().then((value) async {
+                          await GoogleSignIn().signOut().then((value) {
+                            //for hiding progress dialog
+                            Navigator.pop(context);
+
+                            //for moving to home screen
+                            Navigator.pop(context);
+
+                            APIs.auth = FirebaseAuth.instance;
+
+                            //replacing home screen with login screen
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (_) => const onBoard()));
+                          });
+                        });
                       },
                     ),
                   ],
