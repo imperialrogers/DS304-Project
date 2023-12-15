@@ -71,7 +71,36 @@ class _BlogInputScreenState extends State<BlogInputScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Blog Input'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.blue[400]!,
+                Colors.blue[800]!,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        title: const Text(
+          'Blog Input',
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: 20,
+              fontWeight: FontWeight.w400,
+              fontFamily: 'Lato'),
+        ),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -81,7 +110,7 @@ class _BlogInputScreenState extends State<BlogInputScreen> {
             children: [
               const SizedBox(height: 8),
               TextFormField(
-                cursorColor: const Color(0xff17CE92),
+                cursorColor: const Color.fromARGB(255, 15, 95, 234),
                 controller: titleController,
                 decoration: InputDecoration(
                   labelText: 'Title',
@@ -96,7 +125,7 @@ class _BlogInputScreenState extends State<BlogInputScreen> {
                       borderRadius: BorderRadius.circular(16)),
                   focusedBorder: OutlineInputBorder(
                       borderSide: const BorderSide(
-                        color: Color(0xff17CE92),
+                        color: Color.fromARGB(255, 15, 95, 234),
                       ),
                       borderRadius: BorderRadius.circular(16)),
                   filled: true,
@@ -109,7 +138,7 @@ class _BlogInputScreenState extends State<BlogInputScreen> {
               ),
               const SizedBox(height: 16),
               TextFormField(
-                cursorColor: const Color(0xff17CE92),
+                cursorColor: const Color.fromARGB(255, 15, 95, 234),
                 controller: contentController,
                 maxLines: 5,
                 decoration: InputDecoration(
@@ -183,8 +212,8 @@ class _BlogInputScreenState extends State<BlogInputScreen> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(
-                        0xff17CE92), // Set the background color to green
+                    backgroundColor: const Color.fromARGB(
+                        206, 15, 95, 234), // Set the background color to green
                   ),
                   child: const Text('Render Blog Card',
                       style: TextStyle(color: Colors.white)),

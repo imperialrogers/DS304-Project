@@ -12,10 +12,11 @@ class GroupList extends StatelessWidget {
     return FutureBuilder(
       future: Future.value(FirebaseAuth.instance.currentUser),
       builder: (ctx, futureSnapshot) {
-        if (futureSnapshot.connectionState == ConnectionState.waiting)
+        if (futureSnapshot.connectionState == ConnectionState.waiting) {
           return const Center(
             child: CircularProgressIndicator(),
           );
+        }
 
         return StreamBuilder(
           stream:
@@ -32,9 +33,10 @@ class GroupList extends StatelessWidget {
               itemBuilder: (ctx, index) =>
                   //Individual Chat Card Modify this
                   SizedBox(
-                height: 120,
+                height: 90,
                 child: Card(
-                  margin: const EdgeInsets.all(12.0),
+                  color: Colors.transparent,
+                  margin: const EdgeInsets.all(10.0),
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
@@ -57,7 +59,11 @@ class GroupList extends StatelessWidget {
                               backgroundImage: NetworkImage(
                                   chatDocs[index]['display_image']),
                             ),
-                            title: Text(chatDocs[index]['group_name']),
+                            title: Text(chatDocs[index]['group_name'],
+                                style: const TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: 'Lato')),
                             onTap: () {
                               Navigator.push(
                                 context,

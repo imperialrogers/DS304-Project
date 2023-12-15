@@ -4,34 +4,63 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ds304/user/blog_add.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class BlogScreen extends StatelessWidget {
-  BlogScreen({super.key});
+  const BlogScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Blogs Screen"),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.blue[400]!,
+                Colors.blue[800]!,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        title: const Text("Blogs Screen",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 22,
+              fontWeight: FontWeight.w400,
+            )),
         actions: [
           IconButton(
-            icon: Icon(Icons.add),
+            icon: const Icon(
+              Icons.edit,
+              color: Colors.white,
+              size: 28,
+            ),
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: ((context) => BlogInputScreen())));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) => const BlogInputScreen())));
             },
           )
         ],
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        centerTitle: true,
       ),
       body: FutureBuilder(
         future: Future.value(FirebaseAuth.instance.currentUser),
         builder: (ctx, futureSnapshot) {
-          if (futureSnapshot.connectionState == ConnectionState.waiting)
-            return Center(
+          if (futureSnapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
               child: CircularProgressIndicator(),
             );
-
+          }
           return StreamBuilder(
             stream: FirebaseFirestore.instance.collection('blogs').snapshots(),
             builder: (ctx, feedSnapshot) {
@@ -43,7 +72,6 @@ class BlogScreen extends StatelessWidget {
               final feedDocs = feedSnapshot.data!.docs;
 
               return ListView.builder(
-                reverse: true,
                 itemCount: feedDocs.length,
                 itemBuilder: (ctx, index) {
                   return GestureDetector(
@@ -97,7 +125,18 @@ class BlogCard extends StatelessWidget {
       elevation: 5,
       margin: const EdgeInsets.only(left: 12, right: 12, top: 16),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => DetailScreen(
+                title: title,
+                content: content,
+                imageUrl: imageUrl,
+              ),
+            ),
+          );
+        },
         child: Row(
           children: [
             Container(
@@ -167,7 +206,31 @@ class DetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Blog Details'),
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.blue[400]!,
+                Colors.blue[800]!,
+              ],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+        ),
+        title: const Text('Blog Details',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 22,
+              fontWeight: FontWeight.w400,
+            )),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios, color: Colors.white),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        centerTitle: true,
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

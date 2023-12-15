@@ -1,5 +1,6 @@
 // import 'package:ds304/home_screen.dart';
 import 'package:ds304/pages/homescreen.dart';
+import 'package:ds304/widget/bottom_nav.dart';
 import 'package:flutter/material.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -35,13 +36,14 @@ class MyApp extends StatelessWidget {
       title: 'Alumni Connect',
       home: StreamBuilder(
         builder: (ctx, userSnapshot) {
-          if (userSnapshot.connectionState == ConnectionState.waiting)
-            return HomeScreen();
-
-          if (userSnapshot.hasData) {
-            return HomeScreen();
+          if (userSnapshot.connectionState == ConnectionState.waiting) {
+            // return const HomeScreen();
+            return const BottomNavBar();
           }
-          return LoginScreen();
+          if (userSnapshot.hasData) {
+            return const BottomNavBar();
+          }
+          return const LoginScreen();
         },
         stream: FirebaseAuth.instance.authStateChanges(),
       ),

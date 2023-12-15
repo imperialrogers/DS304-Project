@@ -27,10 +27,15 @@ class _ChatUserCardState extends State<ChatUserCard> {
     final mq = MediaQuery.of(context).size;
     return Card(
       margin: EdgeInsets.symmetric(horizontal: mq.width * .04, vertical: 4),
-      // color: Colors.blue.shade100,
-      elevation: 0.5,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: InkWell(
+      elevation: 2.2,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20),
+      ),
+      shadowColor: const Color.fromARGB(255, 118, 118, 118),
+      child: Material(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15),
+        child: InkWell(
           onTap: () {
             //for navigating to chat screen
             Navigator.push(
@@ -67,16 +72,27 @@ class _ChatUserCardState extends State<ChatUserCard> {
                 ),
 
                 //user name
-                title: Text(widget.user.name),
+                title: Text(
+                  widget.user.name,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 15,
+                    fontFamily: 'Lato',
+                    color: Colors.black,
+                  ),
+                ),
 
                 //last message
                 subtitle: Text(
-                    _message != null
-                        ? _message!.type == Type.image
-                            ? 'image'
-                            : _message!.msg
-                        : widget.user.about,
-                    maxLines: 1),
+                  _message != null
+                      ? _message!.type == Type.image
+                          ? 'image'
+                          : _message!.msg
+                      : widget.user.about,
+                  maxLines: 1,
+                  style: const TextStyle(
+                      fontSize: 13, color: Colors.black54, fontFamily: 'Lato'),
+                ),
 
                 //last message time
                 trailing: _message == null
@@ -97,11 +113,14 @@ class _ChatUserCardState extends State<ChatUserCard> {
                         Text(
                             MyDateUtil.getLastMessageTime(
                                 context: context, time: _message!.sent),
-                            style: const TextStyle(color: Colors.black54),
+                            style: const TextStyle(
+                                color: Colors.black54, fontSize: 13),
                           ),
               );
             },
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

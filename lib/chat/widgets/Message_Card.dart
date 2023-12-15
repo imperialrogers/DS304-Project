@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:ds304/dialogs.dart';
 import 'package:ds304/helpers/apis.dart';
@@ -45,24 +44,30 @@ class _MessageCardState extends State<MessageCard> {
         Flexible(
           child: Container(
             padding: EdgeInsets.all(widget.message.type == Type.image
-                ? mq.width * .03
-                : mq.width * .04),
+                ? mq.width * .04
+                : mq.width * .03),
             margin: EdgeInsets.symmetric(
-                horizontal: mq.width * .04, vertical: mq.height * .01),
+                horizontal: mq.width * .05, vertical: mq.height * .01),
             decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 221, 245, 255),
-                border: Border.all(color: Colors.lightBlue),
+                color: Colors.grey[300]!.withOpacity(.5),
+                border: Border.all(
+                  color: Colors.grey[300]!.withOpacity(.5),
+                ),
                 //making borders curved
                 borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
-                    bottomRight: Radius.circular(30))),
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15),
+                    bottomRight: Radius.circular(15))),
             child: widget.message.type == Type.text
                 ?
                 //show text
                 Text(
                     widget.message.msg,
-                    style: const TextStyle(fontSize: 15, color: Colors.black87),
+                    style: const TextStyle(
+                        fontSize: 16,
+                        color: Color.fromARGB(192, 0, 0, 0),
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Lato'),
                   )
                 :
                 //show image
@@ -107,7 +112,8 @@ class _MessageCardState extends State<MessageCard> {
 
             //double tick blue icon for message read
             if (widget.message.read.isNotEmpty)
-              const Icon(Icons.done_all_rounded, color: Colors.blue, size: 20),
+              const Icon(Icons.done_all_rounded,
+                  color: Color.fromARGB(255, 33, 121, 243), size: 20),
 
             //for adding some space
             const SizedBox(width: 2),
@@ -125,24 +131,29 @@ class _MessageCardState extends State<MessageCard> {
         Flexible(
           child: Container(
             padding: EdgeInsets.all(widget.message.type == Type.image
-                ? mq.width * .03
-                : mq.width * .04),
+                ? mq.width * .04
+                : mq.width * .03),
             margin: EdgeInsets.symmetric(
-                horizontal: mq.width * .04, vertical: mq.height * .01),
+                horizontal: mq.width * .05, vertical: mq.height * .02),
             decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 218, 255, 176),
-                border: Border.all(color: Colors.lightGreen),
-                //making borders curved
+                color: const Color.fromARGB(255, 36, 144, 234),
+                border: Border.all(
+                    color: const Color.fromARGB(
+                        255, 36, 144, 234)), //making borders curved
                 borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
-                    bottomLeft: Radius.circular(30))),
+                    topLeft: Radius.circular(15),
+                    topRight: Radius.circular(15),
+                    bottomLeft: Radius.circular(15))),
             child: widget.message.type == Type.text
                 ?
                 //show text
                 Text(
                     widget.message.msg,
-                    style: const TextStyle(fontSize: 15, color: Colors.black87),
+                    style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Lato'),
                   )
                 :
                 //show image
