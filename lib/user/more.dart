@@ -171,7 +171,7 @@ class MoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 247, 241, 241),
+      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text(
           'More',
@@ -181,6 +181,7 @@ class MoreScreen extends StatelessWidget {
             fontWeight: FontWeight.w400,
           ),
         ),
+        automaticallyImplyLeading: false,
         centerTitle: true,
       ),
       body: SingleChildScrollView(

@@ -60,7 +60,7 @@ class _BlogInputScreenState extends State<BlogInputScreen> {
         .set({
       'content': contentController.text,
       'image_url': url,
-      'subtitile': titleController.text,
+      'subtitile': contentController.text,
       'title': titleController.text,
       'time': DateTime.now(),
       'userId': APIs.me.id,
