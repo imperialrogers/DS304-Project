@@ -1,5 +1,7 @@
 # DS304 Project
 
+Welcome
+
 A new Flutter project.
 
 ## Getting Started
