@@ -262,6 +262,7 @@ class _MessageState extends State<Members> {
                 fontWeight: FontWeight.w500,
               ),
             ),
+            automaticallyImplyLeading: false,
             centerTitle: false,
             backgroundColor: const Color(0xffFFFFFF),
             actions: [

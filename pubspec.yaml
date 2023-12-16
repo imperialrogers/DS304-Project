@@ -66,6 +66,7 @@ dependencies:
   share: ^2.0.4
   contacts_service: ^0.6.3
   flutter_phone_direct_caller: ^2.1.1
+  giffy_dialog: ^2.0.0+2
 
 dev_dependencies:
   flutter_test:

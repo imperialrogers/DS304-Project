@@ -72,13 +72,11 @@ class _MessageState extends State<Message> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight + 4.0),
         child: Container(
-          decoration: BoxDecoration(
-            boxShadow: [], // Remove the shadow
-          ),
           padding: const EdgeInsets.only(
               top: 8.0,
               bottom: 8.0), // Adjust the padding to move the title down
           child: AppBar(
+            automaticallyImplyLeading: false,
             title: const Text(
               'Recent Chats',
               style: TextStyle(
