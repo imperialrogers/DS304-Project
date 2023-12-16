@@ -43,6 +43,7 @@ dependencies:
   flutter_tts: ^3.8.5
   google_nav_bar: ^5.0.6
   image_picker: ^1.0.4
+  url_launcher: ^6.0.10
   line_icons: ^2.0.3
   material_design_icons_flutter: ^7.0.7296
   meta: ^1.10.0
@@ -63,6 +64,8 @@ dependencies:
   motion_tab_bar_v2: ^0.3.0
   appinio_social_share: ^0.2.6
   share: ^2.0.4
+  contacts_service: ^0.6.3
+  flutter_phone_direct_caller: ^2.1.1
 
 dev_dependencies:
   flutter_test:

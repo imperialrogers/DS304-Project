@@ -24,10 +24,11 @@ class _MessageCardState extends State<MessageCard> {
     final mq = MediaQuery.of(context).size;
     bool isMe = APIs.user.uid == widget.message.fromId;
     return InkWell(
-        onLongPress: () {
-          _showBottomSheet(isMe, mq);
-        },
-        child: isMe ? _greenMessage(mq) : _blueMessage(mq));
+      onLongPress: () {
+        _showBottomSheet(isMe, mq);
+      },
+      child: isMe ? _greenMessage(mq) : _blueMessage(mq),
+    );
   }
 
   // sender or another user message
@@ -49,9 +50,10 @@ class _MessageCardState extends State<MessageCard> {
             margin: EdgeInsets.symmetric(
                 horizontal: mq.width * .05, vertical: mq.height * .01),
             decoration: BoxDecoration(
-                color: Colors.grey[300]!.withOpacity(.5),
+                color: Color.fromARGB(76, 224, 224, 224)!.withOpacity(.5),
                 border: Border.all(
-                  color: Colors.grey[300]!.withOpacity(.5),
+                  color:
+                      const Color.fromARGB(255, 121, 119, 119)!.withOpacity(.5),
                 ),
                 //making borders curved
                 borderRadius: const BorderRadius.only(
@@ -65,8 +67,8 @@ class _MessageCardState extends State<MessageCard> {
                     widget.message.msg,
                     style: const TextStyle(
                         fontSize: 16,
-                        color: Color.fromARGB(192, 0, 0, 0),
-                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400,
                         fontFamily: 'Lato'),
                   )
                 :
@@ -113,7 +115,7 @@ class _MessageCardState extends State<MessageCard> {
             //double tick blue icon for message read
             if (widget.message.read.isNotEmpty)
               const Icon(Icons.done_all_rounded,
-                  color: Color.fromARGB(255, 33, 121, 243), size: 20),
+                  color: Color.fromARGB(255, 33, 121, 243), size: 18),
 
             //for adding some space
             const SizedBox(width: 2),
@@ -136,10 +138,10 @@ class _MessageCardState extends State<MessageCard> {
             margin: EdgeInsets.symmetric(
                 horizontal: mq.width * .05, vertical: mq.height * .02),
             decoration: BoxDecoration(
-                color: const Color.fromARGB(255, 36, 144, 234),
+                color: const Color.fromARGB(65, 36, 145, 234),
                 border: Border.all(
-                    color: const Color.fromARGB(
-                        255, 36, 144, 234)), //making borders curved
+                    color: Color.fromARGB(
+                        151, 36, 145, 234)), //making borders curved
                 borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(15),
                     topRight: Radius.circular(15),
@@ -151,8 +153,8 @@ class _MessageCardState extends State<MessageCard> {
                     widget.message.msg,
                     style: const TextStyle(
                         fontSize: 16,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w400,
                         fontFamily: 'Lato'),
                   )
                 :
@@ -200,7 +202,7 @@ class _MessageCardState extends State<MessageCard> {
                   //copy option
                   _OptionItem(
                       icon: const Icon(Icons.copy_all_rounded,
-                          color: Colors.blue, size: 26),
+                          color: Color.fromARGB(255, 15, 95, 234), size: 26),
                       name: 'Copy Text',
                       onTap: () async {
                         await Clipboard.setData(
@@ -216,7 +218,7 @@ class _MessageCardState extends State<MessageCard> {
                   //save option
                   _OptionItem(
                       icon: const Icon(Icons.download_rounded,
-                          color: Colors.blue, size: 26),
+                          color: Color.fromARGB(255, 15, 95, 234), size: 26),
                       name: 'Save Image',
                       onTap: () async {
                         try {
@@ -247,7 +249,8 @@ class _MessageCardState extends State<MessageCard> {
               //edit option
               if (widget.message.type == Type.text && isMe)
                 _OptionItem(
-                    icon: const Icon(Icons.edit, color: Colors.blue, size: 26),
+                    icon: const Icon(Icons.edit,
+                        color: Color.fromARGB(255, 15, 95, 234), size: 26),
                     name: 'Edit Message',
                     onTap: () {
                       //for hiding bottom sheet
@@ -278,7 +281,8 @@ class _MessageCardState extends State<MessageCard> {
 
               //sent time
               _OptionItem(
-                  icon: const Icon(Icons.remove_red_eye, color: Colors.blue),
+                  icon: const Icon(Icons.remove_red_eye,
+                      color: Color.fromARGB(255, 15, 95, 234)),
                   name:
                       'Sent At: ${MyDateUtil.getMessageTime(context: context, time: widget.message.sent)}',
                   onTap: () {}),
@@ -300,62 +304,66 @@ class _MessageCardState extends State<MessageCard> {
     String updatedMsg = widget.message.msg;
 
     showDialog(
-        context: context,
-        builder: (_) => AlertDialog(
-              contentPadding: const EdgeInsets.only(
-                  left: 24, right: 24, top: 20, bottom: 10),
+      context: context,
+      builder: (_) => AlertDialog(
+        contentPadding:
+            const EdgeInsets.only(left: 24, right: 24, top: 20, bottom: 10),
 
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
 
-              //title
-              title: Row(
-                children: const [
-                  Icon(
-                    Icons.message,
-                    color: Colors.blue,
-                    size: 28,
-                  ),
-                  Text(' Update Message')
-                ],
-              ),
+        //title
+        title: const Row(
+          children: [
+            Icon(
+              Icons.message,
+              color: Color.fromARGB(255, 15, 95, 234),
+              size: 28,
+            ),
+            Text(' Update Message')
+          ],
+        ),
 
-              //content
-              content: TextFormField(
-                initialValue: updatedMsg,
-                maxLines: null,
-                onChanged: (value) => updatedMsg = value,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15))),
-              ),
+        //content
+        content: TextFormField(
+          initialValue: updatedMsg,
+          maxLines: null,
+          onChanged: (value) => updatedMsg = value,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(15),
+            ),
+          ),
+        ),
 
-              //actions
-              actions: [
-                //cancel button
-                MaterialButton(
-                    onPressed: () {
-                      //hide alert dialog
-                      Navigator.pop(context);
-                    },
-                    child: const Text(
-                      'Cancel',
-                      style: TextStyle(color: Colors.blue, fontSize: 16),
-                    )),
+        //actions
+        actions: [
+          //cancel button
+          MaterialButton(
+              onPressed: () {
+                //hide alert dialog
+                Navigator.pop(context);
+              },
+              child: const Text(
+                'Cancel',
+                style: TextStyle(
+                    color: Color.fromARGB(255, 15, 95, 234), fontSize: 16),
+              )),
 
-                //update button
-                MaterialButton(
-                    onPressed: () {
-                      //hide alert dialog
-                      Navigator.pop(context);
-                      APIs.updateMessage(widget.message, updatedMsg);
-                    },
-                    child: const Text(
-                      'Update',
-                      style: TextStyle(color: Colors.blue, fontSize: 16),
-                    ))
-              ],
-            ));
+          //update button
+          MaterialButton(
+              onPressed: () {
+                //hide alert dialog
+                Navigator.pop(context);
+                APIs.updateMessage(widget.message, updatedMsg);
+              },
+              child: const Text(
+                'Update',
+                style: TextStyle(
+                    color: Color.fromARGB(255, 15, 95, 234), fontSize: 16),
+              ))
+        ],
+      ),
+    );
   }
 }
 

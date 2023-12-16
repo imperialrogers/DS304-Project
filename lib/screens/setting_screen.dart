@@ -13,19 +13,6 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-        elevation: 1,
-        leading: IconButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.green,
-          ),
-        ),
-      ),
       body: Container(
         padding: const EdgeInsets.only(left: 16, top: 25, right: 16),
         child: ListView(
@@ -41,7 +28,7 @@ class _SettingsPageState extends State<SettingsPage> {
               children: [
                 Icon(
                   Icons.person,
-                  color: Colors.green,
+                  color: Color.fromARGB(255, 18, 85, 255),
                 ),
                 SizedBox(
                   width: 8,
@@ -71,7 +58,7 @@ class _SettingsPageState extends State<SettingsPage> {
               children: [
                 Icon(
                   Icons.volume_up_outlined,
-                  color: Colors.green,
+                  color: Color.fromARGB(255, 18, 85, 255),
                 ),
                 SizedBox(
                   width: 8,
@@ -95,24 +82,6 @@ class _SettingsPageState extends State<SettingsPage> {
             const SizedBox(
               height: 50,
             ),
-            Center(
-              child: OutlinedButton(
-                onPressed: () {},
-                style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
-                  shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(20))),
-                ),
-                child: const Text(
-                  "SIGN OUT",
-                  style: TextStyle(
-                      fontSize: 16,
-                      letterSpacing: 2,
-                      color: Colors.black,
-                      fontWeight: FontWeight.w600),
-                ),
-              ),
-            )
           ],
         ),
       ),
