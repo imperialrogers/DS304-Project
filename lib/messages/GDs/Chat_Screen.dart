@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'messages.dart';
 import 'new_messages.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({
@@ -11,39 +12,63 @@ class ChatScreen extends StatelessWidget {
   final String title;
   final String id;
 
+  Future<void> _openContactList(BuildContext context) async {
+    // Example: Open the dialer without a specific phone number
+    String url = 'tel:';
+    try {
+      if (await canLaunch(url)) {
+        await launch(url);
+      } else {
+        print('Could not launch $url');
+      }
+    } catch (e) {
+      print('Error: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          title: Text(title,
-              style: const TextStyle(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w400,
-                  fontFamily: 'Lato')),
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  Colors.blue[400]!,
-                  Colors.blue[800]!,
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
-            ),
+        backgroundColor: Color.fromARGB(255, 242, 238, 238),
+        title: Text(title,
+            style: const TextStyle(
+                color: Colors.black,
+                fontSize: 22,
+                fontWeight: FontWeight.w400,
+                fontFamily: 'Lato')),
+        centerTitle: true,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
           ),
-          centerTitle: true,
-          leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        actions: [
+          IconButton(
             icon: const Icon(
-              Icons.arrow_back_ios,
-              color: Colors.white,
+              Icons.call,
+              color: Colors.black54,
             ),
             onPressed: () {
-              Navigator.pop(context);
+              _openContactList(context);
             },
-          )),
-      backgroundColor: Colors.grey[50],
+          ),
+          IconButton(
+            icon: const Icon(
+              Icons.more_vert,
+              color: Colors.black54,
+            ),
+            onPressed: () {
+              // Add your functionality for the three dots button here
+            },
+          ),
+        ],
+      ),
+      backgroundColor: const Color.fromARGB(233, 255, 255, 255),
       body: Column(
         children: [
           Expanded(

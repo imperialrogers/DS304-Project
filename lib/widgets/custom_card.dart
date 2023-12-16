@@ -16,22 +16,26 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: 65,
-      child: Card(
-        margin: const EdgeInsets.only(left: 10.0, right: 10.0, top: 2.0),
-        elevation: 4.0,
-        child: Container(
-          color: Colors.white,
-          child: Center(
-            child: ListTile(
-              iconColor: Colors.black,
-              textColor: Colors.black,
-              leading: Icon(icon),
-              title: Text(title),
-              trailing: const Icon(Icons.arrow_forward_ios),
-              onTap: () {
-                onTap();
-              },
+      child: Container(
+        color: Colors.white,
+        child: Center(
+          child: ListTile(
+            iconColor: Colors.black54,
+            textColor: Colors.black,
+            leading: Icon(icon, size: 20),
+            title: Text(title,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                    fontFamily: 'Lato')),
+            trailing: const Icon(
+              Icons.arrow_forward_ios,
+              size: 18,
             ),
+            onTap: () {
+              onTap();
+            },
           ),
         ),
       ),
